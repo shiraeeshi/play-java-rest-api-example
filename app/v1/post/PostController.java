@@ -58,4 +58,10 @@ public class PostController extends Controller {
             return created(Json.toJson(savedResource));
         }, ec.current());
     }
+
+    public CompletionStage<Result> delete(String id) {
+    	return handler.delete(id).thenApplyAsync(result -> {
+    		return ok(Json.toJson(result));
+    	}, ec.current());
+    }
 }

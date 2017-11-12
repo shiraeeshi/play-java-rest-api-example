@@ -5,41 +5,34 @@ package v1.post;
  */
 public class PostResource {
     private String id;
-    private String link;
-    private String title;
-    private String body;
+    private String name;
+    private int price;
 
     public PostResource() {
     }
 
-    public PostResource(String id, String link, String title, String body) {
+    public PostResource(String id, String name, int price) {
         this.id = id;
-        this.link = link;
-        this.title = title;
-        this.body = body;
+        this.name = name;
+        this.price = price;
     }
 
-    public PostResource(PostData data, String link) {
+    public PostResource(PostData data) {
         this.id = data.id.toString();
-        this.link = link;
-        this.title = data.title;
-        this.body = data.body;
+        this.name = data.name;
+        this.price = data.price;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getLink() {
-        return link;
+    public String getName() {
+        return name;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getBody() {
-        return body;
+    public int getPrice() {
+        return price;
     }
 
 }

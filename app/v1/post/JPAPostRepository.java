@@ -53,6 +53,11 @@ public class JPAPostRepository implements PostRepository {
         return supplyAsync(() -> wrap(em -> Failsafe.with(circuitBreaker).get(() -> modify(em, id, postData))), ec);
     }
 
+    @Override
+    public CompletionStage<OperationResult> delete(Long id) {
+    	return supplyAsync(() -> wrap(em -> new OperationResult(delete(em, id))), ec);
+    }
+
     private <T> T wrap(Function<EntityManager, T> function) {
         return jpaApi.withTransaction(function);
     }
@@ -70,14 +75,24 @@ public class JPAPostRepository implements PostRepository {
     private Optional<PostData> modify(EntityManager em, Long id, PostData postData) throws InterruptedException {
         final PostData data = em.find(PostData.class, id);
         if (data != null) {
-            data.title = postData.title;
-            data.body = postData.body;
+            data.name = postData.name;
+            data.price = postData.price;
         }
-        Thread.sleep(10000L);
+        //Thread.sleep(10000L);
         return Optional.ofNullable(data);
     }
 
     private PostData insert(EntityManager em, PostData postData) {
         return em.merge(postData);
+    }
+
+    private boolean delete(EntityManager em, Long id) {
+        Optional<PostData> foundData = Optional.ofNullable(em.find(PostData.class, id));
+        if (!foundData.isPresent()) {
+        	return false;
+        }
+        PostData data = foundData.get();
+		em.remove(data);
+		return true;
     }
 }

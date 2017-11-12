@@ -6,20 +6,20 @@ import javax.persistence.*;
  * Data returned from the database
  */
 @Entity
-@Table(name = "posts")
+@Table(name = "products")
 public class PostData {
 
     public PostData() {
     }
 
-    public PostData(String title, String body) {
-        this.title = title;
-        this.body = body;
+    public PostData(String name, int price) {
+        this.name = name;
+        this.price = price;
     }
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     public Long id;
-    public String title;
-    public String body;
+    public String name;
+    public int price;
 }

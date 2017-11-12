@@ -10,7 +10,7 @@ inThisBuild(
        "com.google.code.findbugs" % "jsr305" % "3.0.1",
        "com.google.guava" % "guava" % "22.0",
        "com.typesafe.akka" %% "akka-stream" % "2.5.6",
-       "com.typesafe.akka" %% "akka-actor" % "2.5.6"
+       "com.typesafe.akka" %% "akka-actor" % "2.5.6",
     )
   )
 )
@@ -26,7 +26,7 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava, GatlingPlugin).co
 
 libraryDependencies += guice
 libraryDependencies += javaJpa
-libraryDependencies += "com.h2database" % "h2" % "1.4.194"
+libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.18"
 
 libraryDependencies += "org.hibernate" % "hibernate-core" % "5.2.9.Final"
 libraryDependencies += "io.dropwizard.metrics" % "metrics-core" % "3.2.1"
